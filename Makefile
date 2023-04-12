@@ -1,11 +1,16 @@
+RUN_COMMAND = docker-compose run --rm app sh -c
+
 lint:
-	docker-compose run --rm app sh -c "flake8"
+	$(RUN_COMMAND) "flake8"
+
+format:
+	$(RUN_COMMAND) "black ."
 
 test:
-	docker-compose run --rm app sh -c "python manage.py test"
+	$(RUN_COMMAND) "python manage.py test"
 
 build:
-	docker build .
+	docker-compose build
 
 run:
 	docker-compose up
